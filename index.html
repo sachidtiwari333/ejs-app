@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Energy Core</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #050508;
+    }
+  </style>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+<script>
+  // Scene
+  const scene = new THREE.Scene();
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.z = 6;
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  document.body.appendChild(renderer.domElement);
+
+  // Core sphere
+  const coreGeometry = new THREE.SphereGeometry(0.6, 64, 64);
+  const coreMaterial = new THREE.MeshStandardMaterial({
+    color: 0x7f5cff,
+    emissive: 0x7f5cff,
+    emissiveIntensity: 0.8,
+    metalness: 0.6,
+    roughness: 0.2
+  });
+  const core = new THREE.Mesh(coreGeometry, coreMaterial);
+  scene.add(core);
+
+  // Energy waves
+  const waveGeometry = new THREE.TorusKnotGeometry(1.6, 0.15, 200, 32);
+  const waveMaterial = new THREE.MeshStandardMaterial({
+    color: 0x00ffd5,
+    emissive: 0x00ffd5,
+    emissiveIntensity: 0.6,
+    metalness: 0.8,
+    roughness: 0.15
+  });
+  const wave = new THREE.Mesh(waveGeometry, waveMaterial);
+  scene.add(wave);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+  const light = new THREE.PointLight(0x7f5cff, 2);
+  light.position.set(4, 3, 4);
+  scene.add(light);
+
+  // Animation
+  function animate() {
+    requestAnimationFrame(animate);
+
+    core.scale.setScalar(1 + Math.sin(Date.now() * 0.003) * 0.08);
+    wave.rotation.x += 0.003;
+    wave.rotation.y += 0.005;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // Resize
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+
+</body>
+</html>

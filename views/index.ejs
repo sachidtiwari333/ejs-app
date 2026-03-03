@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create Account</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        },
+        gradientMove: {
+          "0%,100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" }
+        }
+      },
+      animation: {
+        fadeUp: "fadeUp 0.9s ease-out forwards",
+        gradient: "gradientMove 12s ease infinite"
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="min-h-screen text-white bg-zinc-950 overflow-hidden">
+
+<!-- Animated Gradient Background -->
+<div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 bg-[length:300%_300%] animate-gradient"></div>
+
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md backdrop-blur-2xl bg-zinc-900/70 border border-white/10 rounded-3xl p-10 shadow-2xl animate-fadeUp">
+
+    <a href="/read" class="text-sm text-blue-400 hover:text-blue-300 transition">
+      ← Read Users
+    </a>
+
+    <h1 class="text-4xl font-semibold tracking-tight mt-6 mb-10">
+      Create Account
+    </h1>
+
+    <form action="/create" method="post" class="space-y-8">
+
+      <!-- Floating Input -->
+      <div class="relative">
+        <input
+          required
+          name="name"
+          type="text"
+          class="peer w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-transparent focus:outline-none focus:border-blue-400 transition"
+          placeholder="Name"
+        />
+        <label class="absolute left-0 top-3 text-white/50 text-sm transition-all
+          peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
+          peer-placeholder-shown:text-white/30
+          peer-focus:-top-4 peer-focus:text-sm peer-focus:text-blue-400">
+          Full Name
+        </label>
+      </div>
+
+      <div class="relative">
+        <input
+          required
+          name="email"
+          type="email"
+          class="peer w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-transparent focus:outline-none focus:border-blue-400 transition"
+          placeholder="Email"
+        />
+        <label class="absolute left-0 top-3 text-white/50 text-sm transition-all
+          peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
+          peer-placeholder-shown:text-white/30
+          peer-focus:-top-4 peer-focus:text-sm peer-focus:text-blue-400">
+          Email Address
+        </label>
+      </div>
+
+      <div class="relative">
+        <input
+          required
+          name="image"
+          type="text"
+          class="peer w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-transparent focus:outline-none focus:border-blue-400 transition"
+          placeholder="Image"
+        />
+        <label class="absolute left-0 top-3 text-white/50 text-sm transition-all
+          peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
+          peer-placeholder-shown:text-white/30
+          peer-focus:-top-4 peer-focus:text-sm peer-focus:text-blue-400">
+          Profile Image URL
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full mt-6 py-3 rounded-xl font-medium text-lg
+        bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600
+        hover:brightness-110 transition
+        active:scale-[0.97] shadow-xl shadow-blue-600/30"
+      >
+        Create ID
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+</body>
+</html>
